@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan
-@ComponentScan(value = "com.eungbean.example")
+@ComponentScan(value = "com.eungbean.example.s3Test")
 public class S3TestApplication {
 
 	public static void main(String[] args) {

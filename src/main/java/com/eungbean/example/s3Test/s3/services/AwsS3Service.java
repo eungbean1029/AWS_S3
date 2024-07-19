@@ -4,6 +4,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AwsS3Service {
 
     @Value("${cloud.aws.s3.bucket}")
@@ -24,6 +26,7 @@ public class AwsS3Service {
     // 2. Multipart upload
     // 3. AWS Multi-part upload
     public ResponseEntity<String> upload(byte[] file) {
+        log.info("upload file initialized");
         String key = "testupload/" + UUID.randomUUID() + ".jpg";
 
         ObjectMetadata objectMetadata = new ObjectMetadata();
