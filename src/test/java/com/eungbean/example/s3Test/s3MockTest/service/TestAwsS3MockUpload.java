@@ -54,9 +54,6 @@ public class TestAwsS3MockUpload {
         // 버킷 생성
         createBucket();
 
-        // 임시로 파일 생성
-        getMockMultiPartFile();
-
         // 임시 키 생성
         String key = generateKey(mockMultipartFile.getName());
         System.out.println("key: " + key);
