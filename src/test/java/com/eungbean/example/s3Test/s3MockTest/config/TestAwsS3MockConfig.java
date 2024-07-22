@@ -9,7 +9,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import io.findify.s3mock.S3Mock;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-//@Configuration
+@Configuration
 public class TestAwsS3MockConfig {
 
     private final int port = 9000;

@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -98,7 +99,7 @@ public class TestAwsS3MockUpload {
         // 파일 내용 확인
         String content = Files.readString(downloadFile.toPath());
         System.out.println("content: " + content);
-        assertEquals("test_content", content);
+        assertEquals(Arrays.toString(mockMultipartFile.getBytes()), Arrays.toString(content.getBytes()));
     }
 
     private void getMockMultiPartFile() {
