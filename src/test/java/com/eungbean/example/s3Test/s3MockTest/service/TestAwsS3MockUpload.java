@@ -5,7 +5,6 @@ import com.amazonaws.services.s3.model.*;
 import com.eungbean.example.s3Test.s3MockTest.config.TestAwsS3MockConfig;
 import io.findify.s3mock.S3Mock;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,15 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -54,7 +49,7 @@ public class TestAwsS3MockUpload {
 
     @Test
     @DisplayName("AWS S3 Upload File 테스트")
-    public void UploadFile() throws IOException {
+    public void MultiPartUploadFile() throws IOException {
         // 버킷 생성
         createBucket();
 
@@ -93,9 +88,9 @@ public class TestAwsS3MockUpload {
         // 파일 다운로드
         S3ObjectInputStream objectContent = s3Object.getObjectContent();
         // 파일 확장자 가져오기
-        String extenstion = getFileExtension(mockMultipartFile.getOriginalFilename());
+        String extension = getFileExtension(mockMultipartFile.getOriginalFilename());
 
-        File downloadFile = new File(key + "." + extenstion);
+        File downloadFile = new File(key + "." + extension);
         saveToFile(objectContent, downloadFile);
 
         assertNotNull(downloadFile);

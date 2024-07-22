@@ -25,7 +25,7 @@ public class TestAwsS3MockConfig {
         return AmazonS3ClientBuilder
                 .standard()
                 .withPathStyleAccessEnabled(true)
-                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint, Regions.US_EAST_1.name()))
+                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint, Regions.AP_SOUTHEAST_2.name()))
                 .withCredentials(new AWSStaticCredentialsProvider(new AnonymousAWSCredentials()))
                 .build();
     }
