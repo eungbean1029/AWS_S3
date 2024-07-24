@@ -34,7 +34,7 @@ public class TestAwsS3MockUpload {
     private AmazonS3 amazonS3;
     private MockMultipartFile mockMultipartFile;
     private final String bucketName = "test-bucket";
-
+    private final String path = "testResult";
     @BeforeEach
     public void startS3Mock() {
         // 임시로 파일 생성
@@ -55,7 +55,7 @@ public class TestAwsS3MockUpload {
         createBucket();
 
         // 임시 키 생성
-        String key = generateKey(mockMultipartFile.getName());
+        String key = generateKey(mockMultipartFile.getOriginalFilename());
         System.out.println("key: " + key);
 
         ObjectMetadata objectMetadata = new ObjectMetadata();
@@ -85,10 +85,8 @@ public class TestAwsS3MockUpload {
 
         // 파일 다운로드
         S3ObjectInputStream objectContent = s3Object.getObjectContent();
-        // 파일 확장자 가져오기
-        String extension = getFileExtension(mockMultipartFile.getOriginalFilename());
 
-        File downloadFile = new File(key + "." + extension);
+        File downloadFile = new File(key);
         saveToFile(objectContent, downloadFile);
 
         assertNotNull(downloadFile);
@@ -112,15 +110,9 @@ public class TestAwsS3MockUpload {
     }
 
     private String generateKey(String fileName) {
-        return UUID.randomUUID() + "_" + fileName;
+        return path + "/" + fileName;
     }
-    private String getFileExtension(String fileName) {
-        if (fileName == null || fileName.lastIndexOf('.') == -1) {
-            // 파일 이름이 null이거나 확장자가 없는 경우 빈 문자열 반환
-            return "";
-        }
-        return fileName.substring(fileName.lastIndexOf('.') + 1);
-    }
+
 
     private void saveToFile(S3ObjectInputStream objectContent, File downloadFile) {
         // 파일 저장
