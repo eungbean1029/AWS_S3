@@ -9,7 +9,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import io.findify.s3mock.S3Mock;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-//@Configuration
+@Configuration
 public class TestAwsS3MockConfig {
 
     private final int port = 9000;
@@ -25,7 +25,7 @@ public class TestAwsS3MockConfig {
         return AmazonS3ClientBuilder
                 .standard()
                 .withPathStyleAccessEnabled(true)
-                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint, Regions.US_EAST_1.name()))
+                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint, Regions.AP_NORTHEAST_2.name()))
                 .withCredentials(new AWSStaticCredentialsProvider(new AnonymousAWSCredentials()))
                 .build();
     }

@@ -11,14 +11,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 public class JasyptConfigTest {
 
-    private final String SECRET_KEY = "awss3";
     private final String ALGORITHM = "PBEWithMD5AndDES";
 
 
-//    @Test
+    @Test
     void string_encryption() {
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();
+        String SECRET_KEY = "awss3";
         config.setPassword(SECRET_KEY);
         config.setAlgorithm(ALGORITHM);
         config.setKeyObtentionIterations("1000");
